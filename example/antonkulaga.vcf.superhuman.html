@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+	<title>Longevity report</title>
+<style >
+
+	/*general styles*/
+    *{
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+	ol{
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        font-size: 1.1vw;
+    }
+    ol li{
+        margin: 1vw 0;
+    }
+	a {
+        color: #87cec3;
+        text-decoration: none;
+    }
+    a:hover{
+        color: #92e0d3;
+    }
+	body{
+        background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color:rgba(84, 255, 218, 0.63);
+        font-family: 'Rajdhani', sans-serif;
+
+    }
+
+
+	/*table styles*/
+    table.ui{
+        border-radius: 0.28571429rem;
+        background: rgba(255, 255, 255, 0);
+		margin-right:auto;
+		margin-left: auto;
+        border-radius: 10px;
+        padding: 0.78571429em 0.78571429em;
+        text-align: left;
+        border-collapse: collapse;
+        vertical-align: middle;
+		font-family: 'Rajdhani', sans-serif;
+        border: 2px solid rgba(208, 224, 240, 0.205);
+        line-height: 1.4285em;
+    }
+    table.ui th{
+        background: #f9fafb00;
+        color: rgba(254, 246, 255, 0.87);
+        padding: 25px 25px 25px 15px;
+        vertical-align: inherit;
+        font-style: none;
+        font-weight: 600;
+        text-transform: none;
+        border-bottom: 3px solid rgb(72, 83, 97);
+        border-right: 1px solid rgb(37, 56, 75);
+		font-size: 1vw;
+    }
+	table.ui td:first-child{
+		color: rgba(254, 246, 255, 0.87);
+		font-weight: 600;
+	}
+    table.ui.selectable.celled.teal.table tr:hover{
+        background-color: #e43b241c;
+    }
+	table.ui.selectable.celled.teal.table .nothover:hover{
+		background-color: #e43a2400;
+	}
+    table.ui td{
+		font-weight: 500;
+        border-top: none;
+        border-left: 1px solid rgb(37, 56, 75);
+		border-bottom: 2.5px solid rgb(72, 83, 97);
+        padding:   25px 25px 25px 15px;
+		font-size: 1vw;
+    }
+    table.ui td:first-child{
+        border-left: none;
+    }
+    .ui.selectable.celled.teal.table{
+		width: 65%;
+        margin-top: 5vw;
+        margin-bottom: 80px;
+        border-top: 0.25em solid rgb(72, 83, 97);
+    }
+.heading{
+	margin-top: 3vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 3vw;
+}
+section{
+	margin-right: -2.5vw;
+}
+img{
+	height: 9vw;
+}
+
+button{
+	background-color: #30849900;
+	cursor: pointer;
+	border: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	width: 95%;
+	height: 2.8vw;
+	border-bottom: 3px solid rgb(69, 70, 92);
+}
+
+
+			
+
+/*used in each div after description and recommendation buttons*/
+    
+	/*exist in both descr and rec*/
+	.board{
+        width: 50%;
+        margin-top: 40px;
+        padding-top: 10px;
+        color:rgb(84, 85, 110);
+        margin-right:auto;
+        margin-left:auto;
+		font-size: 1.5vw;
+    }
+
+
+    .board p{
+        line-height: 1.7;
+        font-weight: 500;
+    }
+	.attention{
+		font-size: 1.6vw;
+		margin-top: 2.5vw;
+		font-weight: 500;
+		color:#61627e;
+	}
+.purple{
+	margin-left: -11px;
+	filter: invert(40%) sepia(12%) saturate(821%) hue-rotate(200deg) brightness(93%) contrast(93%);
+	height: 2vw;
+	margin-right: 1vw;
+	transition: transform 0.3s;
+}
+button.active .purple{
+	transform: rotate(90deg);
+}
+	
+
+	
+    h1{
+        text-align: center;
+		font-size: 3vw;
+        font-weight: 500;
+		margin-top: 4vw;
+		font-family: 'Chakra Petch', sans-serif;
+		margin-right: 5vw;
+		margin-left: 5vw;
+    }
+
+.hidden{
+	width: 100%;
+	padding-top: 0vw;
+	color:#727494;
+	font-size: 1.2vw;
+	line-height: 0.5vw;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  padding-right: 0.8vw;
+  padding-left: 0.2vw;
+}
+.hidden p{
+	line-height: 1.5vw;
+}
+
+
+	@media only screen and (max-width: 1400px) {
+		.heading{
+			margin-top: 10vw;
+		}
+		h1{
+			font-size: 5.5vw;
+		}
+		img{
+			margin-top: 0vw;
+			height: 17vw;
+		}
+		.board{
+			margin-top: 8vw;
+			font-size: 3vw;
+			width: 80%;
+			margin-bottom: 10vw;
+		}
+		.attention{
+		font-size: 3.1vw;
+		margin-top: 4vw;
+		}
+		table.ui td, table.ui th{
+		font-size: 2vw;
+		}
+		.ui.table td:last-child{
+			padding: 20px 20px 20px 10px;
+			font-size: 1.5vw;
+		width: 4vw;
+		word-break: break-all;
+		}
+button{
+	height: 5vw;
+}
+.purple{
+	height: 3.5vw;
+}
+.hidden{
+	font-size: 2.3vw;
+}
+.hidden p{
+	line-height: 2.5vw;
+}
+}
+	@media only screen and (max-width: 600px){
+		.heading{
+			flex-direction: column-reverse;
+			align-items: center;
+			margin-top: 20vw;
+		}
+		h1{
+			font-size: 9.5vw;
+		}
+		img{
+			margin-left: 2vw;
+			margin-top: 0vw;
+			height: 40vw;
+			width: 43vw;
+		}
+		.board{
+			font-size: 5vw;
+			width: 80%;
+			margin-bottom: 10vw;
+		}
+		.attention{
+		font-size: 5vw;
+		margin-top: 6vw;
+		}
+		table.ui td, table.ui th{
+			padding: 5px 5px 5px 3px;
+		font-size: 3vw;
+		}
+		table.ui{
+			margin-left:-7px;
+			line-height: 3vw;
+			margin-bottom: 20vw;
+		}
+		.ui.table td:last-child{
+			padding: 2px 2px 2px 1px;
+			font-size: 1.5vw;
+		width: 4vw;
+		word-break: break-all;
+		}
+		button{
+			height: 9vw;
+			border-bottom: 1px solid rgb(69, 70, 92);
+		}
+		.purple{
+			width: 8vw;
+			height: 7vw;
+			margin-left: -13px;
+		}.hidden{
+			width: 100%;
+			font-size: 4vw;
+		}
+		.hidden p{
+			line-height: 4.4vw;
+		}
+	}
+</style>
+    
+</head>
+
+<body>
+<div>
+	<div class="heading">
+		<section><h1>Superhuman Genes</h1></section>
+		<img src="https://github.com/dna-seq/just_superhuman/blob/main/superhumansite.png?raw=true">
+	</div>
+	<div class="board">
+		<p>This is Superhuman genes report. In this report you can find the information about "superhuman" genes that you possess. </p>
+		<p></p>
+		<p>Based on the  <a href="https://arep.med.harvard.edu/gmc/protect.html">spreadsheet</a> by George Church.
+		</p>
+	<button class="attention accordion"><img class = "purple" src="https://raw.githubusercontent.com/dna-seq/superhumanreporter/09dfc81b924b4b4d55ad756a38cf717c9d26bfa7/angle-small-right.svg"><div>Pay attention!</div></button>
+	<div class="hidden"><p>It's important to understand that having the "superability" gene variant does not guarantee that you will definitely have the corresponding superpower. This gene variant may only predispose you to the trait, meaning that it increases the likelihood of developing the superpower, but it is not a guarantee.</p>
+	<p>This is because genes can have varying degrees of expressivity (which refers to how strongly a gene is expressed in an individual) and penetrance (which refers to the proportion of individuals with a particular gene variant who actually express the associated trait). Even if you possess the "superability" gene, other factors like gene interactions and environmental factors can also affect whether the trait is manifested. So, while having the gene variant may increase your chances of developing the superpower, it's not a certainty.</p></div>
+</div>
+	<table class="ui selectable celled teal table">
+		<thead>
+			<tr class="nothover">
+				<th>ID</th><th>Gene</th><th>rsID</th><th>Ref allele</th><th>Alt Allele</th><th>My genotype</th><th>Superability</th><th>Possible adverse effects</th><th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>ANGPTL3</td>
+				<td>rs1168015</td>
+				<td>C</td>
+				<td>G</td>
+				<td>G/C</td>
+				<td>Lower risk of  cardiac diseases; lipid protection</td>
+				<td>Not reported</td>
+				<td><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1612790">https://www.nejm.org/doi/full/10.1056/NEJMoa1612790</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>NTRK1</td>
+				<td>rs2644614</td>
+				<td>A</td>
+				<td>C</td>
+				<td>C/C</td>
+				<td>Pain insensitive, no sweat (anhydrosis)</td>
+				<td>Unnoticed harm, hyperthermia</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs2644614">https://www.ncbi.nlm.nih.gov/snp/rs2644614</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>NTRK1</td>
+				<td>rs6337</td>
+				<td>C</td>
+				<td>T</td>
+				<td>T/T</td>
+				<td>Pain insensitive, no sweat (anhydrosis)</td>
+				<td>Unnoticed harm, hyperthermia</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs6337">https://www.ncbi.nlm.nih.gov/snp/rs6337</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>HBB</td>
+				<td>rs7946748</td>
+				<td>G</td>
+				<td>A</td>
+				<td>A/G</td>
+				<td>Malaria resistance</td>
+				<td>Exertional rhabdomyolysis</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>HBB</td>
+				<td>rs10768683</td>
+				<td>C</td>
+				<td>G</td>
+				<td>G/C</td>
+				<td>Malaria resistance</td>
+				<td>Exertional rhabdomyolysis</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/</a></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>HBB</td>
+				<td>rs713040</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/A</td>
+				<td>Malaria resistance</td>
+				<td>Exertional rhabdomyolysis</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9266585/</a></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>BDKRB2</td>
+				<td>rs7158863</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>Deep Diving; ability to hold breathe</td>
+				<td>Not reported</td>
+				<td><a href="https://www.cell.com/cell/fulltext/S0092-8674(18)30386-6">https://www.cell.com/cell/fulltext/S0092-8674(18)30386-6</a></td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>IFNL4</td>
+				<td>rs11322783</td>
+				<td>T</td>
+				<td>-</td>
+				<td>-/T</td>
+				<td>High Hepatitis C virus clearance</td>
+				<td>Not reported</td>
+				<td><a href="https://www.jimmunol.org/content/199/11/3808.long">https://www.jimmunol.org/content/199/11/3808.long</a></td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>FUT2</td>
+				<td>rs601338</td>
+				<td>G</td>
+				<td>A</td>
+				<td>A/G</td>
+				<td>Norovirus resistance</td>
+				<td>Crohn's disease</td>
+				<td><a href="None">None</a></td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>IFIH1</td>
+				<td>rs1990760</td>
+				<td>C</td>
+				<td>T</td>
+				<td>T/C</td>
+				<td>Lower risk of  Type 1 Diabetes</td>
+				<td>Not reported</td>
+				<td><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0012646">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0012646</a></td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>SCN9A</td>
+				<td>rs9646771</td>
+				<td>T</td>
+				<td>C</td>
+				<td>C/C</td>
+				<td>Pain insensitive</td>
+				<td>Loss of the sense of smell</td>
+				<td><a href="None">None</a></td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td>SCN9A</td>
+				<td>rs9646771</td>
+				<td>T</td>
+				<td>C</td>
+				<td>C/C</td>
+				<td>Pain insensitive</td>
+				<td>Same variants may cause hypersensitivity</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs9646771">https://www.ncbi.nlm.nih.gov/snp/rs9646771</a></td>
+			</tr>
+			<tr>
+				<td>13</td>
+				<td>HSD17B13</td>
+				<td>rs72613567</td>
+				<td>-</td>
+				<td>A</td>
+				<td>A/-</td>
+				<td>Low Chronic Liver Disease</td>
+				<td>Not reported</td>
+				<td><a href="https://www.nejm.org/doi/10.1056/NEJMoa1712191">https://www.nejm.org/doi/10.1056/NEJMoa1712191</a></td>
+			</tr>
+			<tr>
+				<td>14</td>
+				<td>GHR</td>
+				<td>rs2940928</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>15</td>
+				<td>GHR</td>
+				<td>rs6179</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>16</td>
+				<td>GHR</td>
+				<td>rs6180</td>
+				<td>A</td>
+				<td>C</td>
+				<td>C/A</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>17</td>
+				<td>GHR</td>
+				<td>rs2910875</td>
+				<td>G</td>
+				<td>A</td>
+				<td>A/G</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>18</td>
+				<td>GHR</td>
+				<td>rs11369980</td>
+				<td>-</td>
+				<td>A</td>
+				<td>A/A</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>19</td>
+				<td>GHR</td>
+				<td>rs7442754</td>
+				<td>G</td>
+				<td>A</td>
+				<td>A/A</td>
+				<td>Low cancer risk, prolongevity</td>
+				<td>Short stature</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4074016/</a></td>
+			</tr>
+			<tr>
+				<td>20</td>
+				<td>RIMS1</td>
+				<td>rs2249021</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>High cognitive</td>
+				<td>Late onset visual loss (Cone-rod dystrophy)</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs2249021">https://www.ncbi.nlm.nih.gov/snp/rs2249021</a></td>
+			</tr>
+			<tr>
+				<td>21</td>
+				<td>RIMS1</td>
+				<td>rs2463730</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>High cognitive</td>
+				<td>Late onset visual loss (Cone-rod dystrophy)</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs2463730">https://www.ncbi.nlm.nih.gov/snp/rs2463730</a></td>
+			</tr>
+			<tr>
+				<td>22</td>
+				<td>RIMS1</td>
+				<td>rs2815736</td>
+				<td>A</td>
+				<td>G</td>
+				<td>G/G</td>
+				<td>High cognitive</td>
+				<td>Late onset visual loss (Cone-rod dystrophy)</td>
+				<td><a href="https://www.ncbi.nlm.nih.gov/snp/rs2815736">https://www.ncbi.nlm.nih.gov/snp/rs2815736</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script>
+
+
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
+	</script>
+	</body>
+	</html>
